@@ -109,7 +109,7 @@ body {
   row-gap: 21px;
 }
 
-.content__forgot-buttons button {
+.content__forgot-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +121,7 @@ body {
   color: #00376b;
 }
 
-.content__forgot-buttons button:first-child {
+.content__forgot-buttons a {
   color: #385185;
   font-size: 14px;
   font-weight: 600;

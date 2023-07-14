@@ -1,0 +1,31 @@
+create new tables
+Code snippet
+my_database
+├── create
+│   ├── create_users.sql
+│   └── create_products.sql
+├── delete
+│   └── delete_user.sql
+├── read
+│   ├── get_all_users.sql
+│   └── get_product_by_id.sql
+└── update
+    └── update_user.sql
+
+Use code with caution. Learn more
+The create folder contains SQL snippets to create tables in the database. 
+The delete folder contains SQL snippets to delete rows from tables in the database. 
+The read folder contains SQL snippets to read rows from tables in the database. 
+The update folder contains SQL snippets to update rows in tables in the database.
+
+Each SQL snippet is named after the operation it performs. For example, the create_users.sql snippet creates the users table in the database. 
+The delete_user.sql snippet deletes a row from the users table. The get_all_users.sql snippet retrieves all rows from the users table. 
+The update_user.sql snippet updates a row in the users table.
+
+The SQL snippets are grouped by operation to make it easier to find the snippet you need. 
+For example, if you need to create a new user, you can look in the create folder for the create_users.sql snippet. 
+If you need to delete a user, you can look in the delete folder for the delete_user.sql snippet.
+
+The SQL snippets are stored in separate files so that they can be easily modified or updated. 
+For example, if you need to change the way users are created, you can edit the create_users.sql snippet. 
+If you need to add a new field to the users table, you can edit the create_users.sql snippet.
