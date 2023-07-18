@@ -45,28 +45,36 @@
             <form class="content__form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="content__inputs">
                     <label>
-                        <input type="text" name="full-name" required />
+                        <input type="text" name="full-name" />
                         <span>Nombre completo</span>
                     </label>
                     <label>
-                        <input type="text" name="company" required />
+                        <input type="text" name="company" />
                         <span>Empresa</span>
                     </label>
                     <label>
-                        <input type="email" name="email" required />
+                        <input type="email" name="email" />
                         <span>Correo electrónico</span>
                     </label>
 
                     <label>
-                        <input type="password" name="password" required />
+                        <input type="password" name="password" />
                         <span>Contraseña</span>
                     </label>
                     <label>
-                        <input type="password" name="password2" required />
+                        <input type="password" name="password2" />
                         <span>Confirmar Contraseña</span>
                     </label>
                 </div>
                 <button>Crear cuenta</button>
+
+                <!-- Error messages -->
+                <?php if (!empty($errorMessage)): ?>
+                    <div class=" p-2">
+                        <?php echo $errorMessage; ?>
+                    </div>
+                <?php endif; ?>
+
             </form>
 
             <div class="content__forgot-buttons">
