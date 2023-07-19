@@ -1,33 +1,35 @@
 <?php #login.controller.php
 
 require_once './app/controller/functions.controller.php';
+require_once './app/clases/User.class.php';
+
 
 
 // define variables and set to empty values
 $successMessage = $errorMessage = $name = $email = "";
 
+$user = new User();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = sanitizePhrase($_POST["email"]);
-    $password = sanitizePhrase($_POST["password"]);
+    $user->setEmail(sanitizePhrase($_POST["email"]));
+    $user->setPassword(sanitizePhrase($_POST["password"]));
 
-    echo "email: $email | pwd: $password";
 
-    if (empty($email) || empty($password)) {
+    echo "email: {$user->getEmail()} | pwd: {$user->getPassword()}";
+
+    if (empty($user->getEmail()) || empty($user->getPassword())) {
+
         # Error message
         $errorMessage .= '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios.</div>';
+
+    } elseif (!validateEmail($user->getEmail()) || !checkPasswordLength($user->getPassword())) {
+
+        # Error message
+        $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña no válidos. <br/>Por favor, inténtalo de nuevo.</div>';
+
     } else {
 
-        $response = sanitizeEmail($email);
-        echo "<br/>Response: $response";
-
-        if (!$response) {
-            # code...
-            $errorMessage .= '<div class="alert alert-danger" role="alert">No es un correo valido.</div>';
-        } else {
-            # code...
-            $successMessage .= '<div class="alert alert-success" role="alert">Correo valido.</div>';
-
-        }
+        $successMessage = '<div class="alert alert-succes" role="alert">Todo bien.</div>';
     }
 
 
