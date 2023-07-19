@@ -12,8 +12,20 @@ class Connection
     public function openConnection()
     {
         $mysqli = mysqli_connect($this->host, $this->user, $this->password, $this->db);
+
+        if (!$mysqli) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
         return $mysqli;
     }
+
+    # Close connection
+    public function closeConnection($mysqli)
+    {
+        mysqli_close($mysqli);
+    }
+
 
 }
 ?>

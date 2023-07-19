@@ -8,6 +8,17 @@ function checkSession()
         header("Location: index.php");
     }
 }
+# Check the session of each page
+function redirectToActivity($requireOnceFile)
+{
+    if (isset($_SESSION['user'])) {
+        # redirect to actividad.php
+        require_once $requireOnceFile;
+    } else {
+        # Redirect to login.php
+        header('Location: login.php');
+    }
+}
 
 # Sanitize Form - Security Phrase
 function sanitizePhrase($pPhrase)
@@ -44,19 +55,23 @@ function sanitizePassword($pPassword)
     return $pPassword;
 }
 
-# Check the session of each page
-function redirectToActivity($requireOnceFile)
+# Check password length
+function checkPasswordLength($password)
 {
-    if (isset($_SESSION['user'])) {
-        # redirect to actividad.php
-        require_once $requireOnceFile;
+    // Minimum password length
+    $minLength = 8;
+
+    // Maximum password length
+    $maxLength = 20;
+
+    // Check if the password length is within the minimum and maximum lengths
+    if (strlen($password) < $minLength) {
+        return false;
+    } else if (strlen($password) > $maxLength) {
+        return false;
     } else {
-        # Redirect to login.php
-        header('Location: login.php');
+        return true;
     }
 }
-
-
-
 
 ?>
