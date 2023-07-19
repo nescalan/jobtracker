@@ -1,6 +1,6 @@
 <?php #login.controller.php
 
-require_once 'app\controller\functions.controller.php';
+require_once './app/controller/functions.controller.php';
 
 
 // define variables and set to empty values
@@ -35,6 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-require_once 'app\views\login.view.php';
+require_once './app/views/login.view.php';
 
 ?>

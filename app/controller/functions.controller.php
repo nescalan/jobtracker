@@ -17,14 +17,8 @@ function sanitizePhrase($pPhrase)
     $pPhrase = stripslashes($pPhrase);
     $pPhrase = strip_tags($pPhrase);
     $pPhrase = filter_var($pPhrase, FILTER_SANITIZE_STRING);
+    $pPhrase = strtolower(($pPhrase));
     return $pPhrase;
-}
-
-# Sanitize Password
-function sanitizePassword($pPassword)
-{
-    $pPassword = htmlspecialchars($pPassword);
-    return $pPassword;
 }
 
 # Sanitize email
@@ -42,8 +36,13 @@ function sanitizeEmail($pEmail)
     return $pEmail;
 }
 
-
-
+# Sanitize Password
+function sanitizePassword($pPassword)
+{
+    $pPassword = trim($pPassword);
+    $pPassword = htmlspecialchars($pPassword);
+    return $pPassword;
+}
 
 # Check the session of each page
 function redirectToActivity($requireOnceFile)
