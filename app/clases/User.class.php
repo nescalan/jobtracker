@@ -9,18 +9,22 @@ class User
     protected $password2;
 
 
-    public function __construct($pName, $pCompany, $pEmail, $pPwd, $pPwd2)
-    {
-        $this->fullName = $pName;
-        $this->company = $pCompany;
-        $this->email = $pEmail;
-        $this->password = $pPwd;
-        $this->password2 = $pPwd2;
+    public function __construct(
+        string $pName = '',
+        string $pCompany = '',
+        string $pEmail = '',
+        string $pPwd = '',
+        string $pPwd2 = ''
+    ) {
+        $this->fullName = isset($pName) ? $pName : '';
+        $this->company = isset($pCompany) ? $pCompany : '';
+        $this->email = isset($pEmail) ? $pEmail : '';
+        $this->password = isset($pPwd) ? $pPwd : '';
+        $this->password2 = isset($pPwd2) ? $pPwd2 : '';
     }
 
+
     # Getters and Setters
-
-
 
     /**
      * Get the value of fullName
@@ -98,6 +102,26 @@ class User
     public function setPassword($password)
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password2
+     */
+    public function getPassword2()
+    {
+        return $this->password2;
+    }
+
+    /**
+     * Set the value of password2
+     *
+     * @return  self
+     */
+    public function setPassword2($password2)
+    {
+        $this->password2 = $password2;
 
         return $this;
     }

@@ -70,9 +70,11 @@
 
                 <!-- Error messages -->
                 <?php if (!empty($errorMessage)): ?>
-                    <div class=" p-2">
+                    <div class="p-2">
                         <?php echo $errorMessage; ?>
                     </div>
+                <?php elseif (!empty($successMessage)): ?>
+                    <?php echo $successMessage ?>
                 <?php endif; ?>
 
             </form>
