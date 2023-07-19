@@ -35,36 +35,36 @@ if (isset($_SESSION['user'])) {
         $user->setFullName(sanitizePhrase($_POST['full-name']));
         $user->setCompany(sanitizePhrase($_POST['company']));
         $user->setEmail(sanitizeEmail($_POST['email']));
-        $user->setPassword(md5(sanitizePassword($_POST['password'])));
-        $user->setPassword2(md5(sanitizePassword($_POST['password2'])));
+        $user->setPassword($_POST['password']);
+        $user->setPassword2($_POST['password2']);
+        // $user->setPassword(md5(sanitizePassword($_POST['password'])));
+        // $user->setPassword2(md5(sanitizePassword($_POST['password2'])));
 
         // // Access the captured information
-        // echo "Full name: {$user->getFullName()} <br/>";
-        // echo "Company: {$user->getCompany()}  <br>";
-        // echo "Email: {$user->getEmail()} <br>";
+        echo "Full name: {$user->getFullName()} <br/>";
+        echo "Company: {$user->getCompany()}  <br>";
+        echo "Email: {$user->getEmail()} <br>";
         echo "Password: {$user->getPassword()} <br>";
         echo "Password2: {$user->getPassword2()} <br>";
 
 
 
 
-        // # Conditional: check empty variables
+        // Check if any of the required fields are empty
         if (empty($user->getFullName()) || empty($user->getCompany()) || empty($user->getEmail()) || empty($user->getPassword()) || empty($user->getPassword2())) {
-            # Error message
-            $errorMessage .= '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios.</div>';
-
+            // Set the error message
+            $errorMessage = '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios.</div>';
+        } elseif ($user->getPassword() !== $user->getPassword2()) {
+            // Set the error message
+            $errorMessage = '<div class="alert alert-danger" role="alert">Las contraseñas no coinciden, intente de nuevo.</div>';
         } else {
-            // Conditional: Check if the password is the same
-            if ($user->getPassword() !== $user->getPassword2()) {
-                $errorMessage .= '<div class="alert alert-danger" role="alert">Las contraseñas no coinciden, intente de nuevo.</div>';
-                // header("Location: register");
-                // exit;
-            }
+            // Set the success message
+            $successMessage = "<div class='alert alert-success' role='alert'>{$user->getFullName()}, gracias por registrarte!</div>";
 
-            # Success message
-            $successMessage .= "<div class='alert alert-success' role='alert'>{$user->getFullName()}, gracias por registrarte!</div>";
-
+            // Get the user's name
             $nombre = $user->getFullName();
+
+            // Echo the success message
             echo "Ya Bretea este carajada: {$nombre}";
         }
     }
