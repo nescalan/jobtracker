@@ -45,15 +45,15 @@
             <form class="content__form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="content__inputs">
                     <label>
-                        <input type="text" name="full-name" />
+                        <input type="text" name="full-name" value="<?php echo ucwords($user->getFullName()); ?>" />
                         <span>Nombre completo</span>
                     </label>
                     <label>
-                        <input type="text" name="company" />
+                        <input type="text" name="company" value="<?php echo ucwords($user->getCompany()); ?>" />
                         <span>Empresa</span>
                     </label>
                     <label>
-                        <input type="email" name="email" />
+                        <input type="email" name="email" value="<?php echo $user->getEmail() ?>" />
                         <span>Correo electrónico</span>
                     </label>
 
