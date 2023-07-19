@@ -44,14 +44,32 @@ if (isset($_SESSION['user'])) {
 
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios.</div>';
+
+        } elseif (!checkNameLength($user->getFullName())) {
+
+            // Set the error message
+            $errorMessage = '<div class="alert alert-danger" role="alert">El nombre debe tener al menos 3 caracteres.</div>';
+
+        } elseif (!checkCompanyLength($user->getCompany())) {
+
+            // Set the error message
+            $errorMessage = '<div class="alert alert-danger" role="alert">La Empresa debe tener al menos 3 caracteres.</div>';
+
+        } elseif (!validateEmail(sanitizeEmail($user->getEmail()))) {
+
+            // Set the error message
+            $errorMessage = '<div class="alert alert-danger" role="alert">El correo no es válido.</div>';
+
         } elseif ($user->getPassword() !== $user->getPassword2()) {
 
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">Las contraseñas no coinciden, intente de nuevo.</div>';
+
         } elseif (!checkPasswordLength($user->getPassword())) {
 
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">La contraseña debe tener al menos 8 caracteres.</div>';
+
         } else {
 
             // Encript the password with md5 algorithm
@@ -82,10 +100,16 @@ if (isset($_SESSION['user'])) {
 
                 mysqli_query($mysqli, $sqlUserInsert);
 
+                // Clean the form variables
+                $user->setFullName('');
+                $user->setCompany('');
+                $user->setEmail('');
 
                 // Set the success message
                 $fullName = ucwords($user->getFullName());
-                $successMessage = "<div class='alert alert-success' role='alert'>{$fullName}, gracias por registrarte!</div>";
+
+
+                $successMessage = "<div class='alert alert-success' role='alert'>Tu cuenta ha sido creada. <br/> Inicia sesión y comenzar a usar nuestro servicio.</div>";
 
                 // Get the user's name
                 $nombre = $user->getFullName();

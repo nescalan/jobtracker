@@ -47,6 +47,19 @@ function sanitizeEmail($pEmail)
     return $pEmail;
 }
 
+# Check if the email is valid
+function validateEmail($email)
+{
+    // Use the filter_var function with FILTER_VALIDATE_EMAIL filter
+
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 # Sanitize Password
 function sanitizePassword($pPassword)
 {
@@ -73,5 +86,44 @@ function checkPasswordLength($password)
         return true;
     }
 }
+
+# Check name length
+function checkNameLength($name)
+{
+    // Minimum password length
+    $minLength = 3;
+
+    // Maximum password length
+    $maxLength = 120;
+
+    // Check if the name length is within the minimum and maximum lengths
+    if (strlen($name) < $minLength) {
+        return false;
+    } else if (strlen($name) > $maxLength) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+# Check company length
+function checkCompanyLength($company)
+{
+    // Minimum password length
+    $minLength = 3;
+
+    // Maximum password length
+    $maxLength = 120;
+
+    // Check if the company length is within the minimum and maximum lengths
+    if (strlen($company) < $minLength) {
+        return false;
+    } else if (strlen($company) > $maxLength) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 
 ?>

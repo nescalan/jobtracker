@@ -53,7 +53,7 @@
                         <span>Empresa</span>
                     </label>
                     <label>
-                        <input type="email" name="email" value="<?php echo $user->getEmail() ?>" />
+                        <input type="text" name="email" value="<?php echo $user->getEmail() ?>" />
                         <span>Correo electrónico</span>
                     </label>
 
