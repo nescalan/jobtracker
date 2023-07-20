@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         # Error message
         $errorMessage .= '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios.</div>';
 
-    } elseif (!validateEmail($user->getEmail()) || !checkPasswordLength($user->getPassword())) {
+    } elseif (validateEmail($user->getEmail()) || !checkPasswordLength($user->getPassword())) {
 
         # Error message
         $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña no válidos. <br/>Por favor, inténtalo de nuevo.</div>';
