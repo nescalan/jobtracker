@@ -11,7 +11,7 @@ $successMessage = $errorMessage = $name = $email = "";
 $user = new User();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user->setEmail(sanitizePhrase($_POST["email"]));
+    $user->setEmail(sanitizeEmail($_POST["email"]));
     $user->setPassword(sanitizePhrase($_POST["password"]));
 
 
@@ -22,14 +22,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         # Error message
         $errorMessage .= '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios.</div>';
 
-    } elseif (validateEmail($user->getEmail()) || !checkPasswordLength($user->getPassword())) {
+    } elseif (!validateEmail($user->getEmail()) || !checkPasswordLength($user->getPassword())) {
 
         # Error message
         $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña no válidos. <br/>Por favor, inténtalo de nuevo.</div>';
 
     } else {
+        require_once './app/model/Connection.php';
 
-        $successMessage = '<div class="alert alert-succes" role="alert">Todo bien.</div>';
+        #Database connection
+        $connection = new Connection();
+        $mysqli = $connection->openConnection();
+
+        #  Check connection
+        if (!$mysqli) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+
+        $email = mysqli_real_escape_string($mysqli, $user->getEmail());
+
+        // Check if user exists
+        $sqlUsers = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
+
+        // Executes the query select
+        $result = mysqli_query($mysqli, $sqlUsers);
+
+        // Fetch the results of quety
+        $resultArray = mysqli_fetch_assoc($result);
+
+        // Check if there are any errors
+        if (mysqli_num_rows($result) < 1) {
+            $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña inválidos. <br/>Por favor, inténtalo de nuevo.</div>';
+
+        } elseif ($user->getPassword() !== $resultArray['password']) {
+            # Error Message
+            $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña inválidos. <br/>Por favor, inténtalo de nuevo.</div>';
+
+        } else {
+            # Success Message
+            $successMessage .= '<div class="alert alert-success" role="alert">Todo bien.</div>';
+        }
+
+
     }
 
 

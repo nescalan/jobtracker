@@ -23,10 +23,8 @@ function redirectToActivity($requireOnceFile)
 # Sanitize Form - Security Phrase
 function sanitizePhrase($pPhrase)
 {
-    $pPhrase = htmlspecialchars($pPhrase);
     $pPhrase = trim($pPhrase);
-    $pPhrase = stripslashes($pPhrase);
-    $pPhrase = strip_tags($pPhrase);
+    $pPhrase = htmlspecialchars($pPhrase);
     $pPhrase = filter_var($pPhrase, FILTER_SANITIZE_STRING);
     $pPhrase = strtolower(($pPhrase));
     return $pPhrase;
@@ -35,28 +33,22 @@ function sanitizePhrase($pPhrase)
 # Sanitize email
 function sanitizeEmail($pEmail)
 {
-    // Remove all characters except letters, digits, and @.
-    $pEmail = htmlspecialchars($pEmail);
-    $pEmail = trim($pEmail);
-    $pEmail = stripcslashes($pEmail);
-    $pEmail = strip_tags($pEmail);
-    $pEmail = filter_var($pEmail, FILTER_SANITIZE_EMAIL);
-    $pEmail = filter_var($pEmail, FILTER_VALIDATE_EMAIL);
+    // Remove all characters except letters, digits, @, dot (.), underscore (_), and hyphen (-).
+    $sanitizedEmail = preg_replace('/[^\w@.-]/', '', $pEmail);
 
     // Return the sanitized email address.
-    return $pEmail;
+    return $sanitizedEmail;
 }
+
 
 # Check if the email is valid
 function validateEmail($email)
 {
-    // Use the filter_var function with FILTER_VALIDATE_EMAIL filter
+    // Remove any surrounding HTML tags from the email address
+    $email = strip_tags($email);
 
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return true;
-    } else {
-        return false;
-    }
+    // Use the filter_var function with FILTER_VALIDATE_EMAIL filter
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
 
 

@@ -74,6 +74,16 @@ body {
   font-size: 16px;
   vertical-align: middle;
 }
+.content__form input[type="email"] {
+  width: 100%;
+  background: inherit;
+  border: 0;
+  outline: none;
+  padding: 9px 8px 7px 8px;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  vertical-align: middle;
+}
 
 .content__form input:valid + span {
   transform: scale(calc(10 / 12)) translateY(-10px);
