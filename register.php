@@ -55,7 +55,7 @@ if (isset($_SESSION['user'])) {
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">La Empresa debe tener al menos 3 caracteres.</div>';
 
-        } elseif (!validateEmail(sanitizeEmail($user->getEmail()))) {
+        } elseif (!validateEmail($user->getEmail())) {
 
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">El correo no es válido.</div>';
@@ -83,6 +83,7 @@ if (isset($_SESSION['user'])) {
 
             // Executes the query select
             $result = mysqli_query($mysqli, $sqlUsers);
+
             // Fetch the results of the query
             $resultArray = mysqli_fetch_assoc($result);
 
@@ -90,6 +91,7 @@ if (isset($_SESSION['user'])) {
             if (mysqli_num_rows($result) > 0) {
                 $errorMessage .= '<div class="alert alert-danger" role="alert">El nombre de usuario ya existe.</div>';
             } else {
+
 
                 // The user does not exist
                 $sqlUserInsert = "INSERT INTO users (fullname, email, password) VALUES (
