@@ -1,5 +1,7 @@
 <?php #login.controller.php
 
+session_start();
+
 require_once './app/controller/functions.controller.php';
 require_once './app/clases/User.class.php';
 
@@ -10,13 +12,16 @@ $successMessage = $errorMessage = $name = $email = "";
 
 $user = new User();
 
+if (isset($_SESSION['user'])) {
+    # Redirect to home page if user is logged in
+    header("Location: actividad.php");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user->setEmail(sanitizeEmail($_POST["email"]));
+    $user->setEmail(sanitizeEmail($_POST["user"]));
     $user->setPassword($_POST['password']);
 
-
     echo "email: {$user->getEmail()} | pwd: {$user->getPassword()} <br>";
-
 
     if (empty($user->getEmail()) || empty($user->getPassword())) {
 
@@ -66,7 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña inválidos. <br/>Por favor, inténtalo de nuevo.</div>';
         } else {
             # Header to actividad.php
+            // $_SESSION['user'] = $user;
             header('Location: actividad.php');
+            $successMessage .= '<div class="alert alert-success" role="alert">En todas.</div>';
+
 
         }
 
@@ -76,6 +84,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connection->closeConnection($mysqli);
     }
 }
+
+
+
+
 
 require_once './app/views/login.view.php';
 
