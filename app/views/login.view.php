@@ -47,7 +47,7 @@
             <form class="content__form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="content__inputs">
                     <label>
-                        <input type="text" name="email" />
+                        <input type="text" name="user" />
                         <span>Correo electrónico</span>
                     </label>
                     <label>
