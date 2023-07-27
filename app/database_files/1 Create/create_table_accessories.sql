@@ -1,9 +1,6 @@
-CREATE TABLE articles (
+CREATE TABLE article_accessories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    description_id INT UNSIGNED NOT NULL,
-    model_brand_id INT UNSIGNED NOT NULL, -- This is the foreign key for model and brand
-    serial_number VARCHAR(45) NOT NULL,
+    accesory VARCHAR(150) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (description_id) REFERENCES article_descriptions (description_id),
-    FOREIGN KEY (model_brand_id) REFERENCES models_brands (model_brand_id)
+    CONSTRAINT fk_article_accessories_id FOREIGN KEY (id) REFERENCES articles (id)
 ) ENGINE = InnoDB;
