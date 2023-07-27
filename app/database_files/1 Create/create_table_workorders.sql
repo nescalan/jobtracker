@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS workorders(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    consecutive INT UNSIGNED NOT NULL,
     workorder_date DATE NOT NULL,
     comments VARCHAR(255),
     customer_id INT UNSIGNED NOT NULL,

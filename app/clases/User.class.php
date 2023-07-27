@@ -2,13 +2,14 @@
 
 class User
 {
+    // Attibutes
     protected $fullName;
     protected $company;
     protected $email;
     protected $password;
     protected $password2;
 
-
+    // Methods
     public function __construct(
         string $pName = '',
         string $pCompany = '',
