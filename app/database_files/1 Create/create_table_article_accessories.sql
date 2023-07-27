@@ -1,5 +1,6 @@
-CREATE TABLE article_accessories(
+CREATE TABLE article_accessories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    accessory VARCHAR(100),
-    FOREIGN KEY (id) REFERENCES articles(id)
-)ENGINE=InnoDB;
+    accesory VARCHAR(150) NOT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_article_accessories_id FOREIGN KEY (id) REFERENCES articles (id)
+) ENGINE = InnoDB;
