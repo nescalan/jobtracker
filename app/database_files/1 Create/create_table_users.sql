@@ -1,8 +1,7 @@
 CREATE TABLE users(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    fullname VARCHAR(120) NOT NULL,
-    company VARCHAR(120) NOT NULL,
-    email VARCHAR(120) NOT NULL,
-    password VARCHAR(120) NOT NULL,
+    fullname VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 )ENGINE = InnoDB;
