@@ -1,8 +1,8 @@
-CREATE TABLE affiliated_companies(
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    company_name VARCHAR(150) NOT NULL,
-    phone VARCHAR(45),
-    email VARCHAR(150),
-    address VARCHAR(255),
-    PRIMARY KEY (id)
-)ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS jobtracker.affiliated_companies (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  company_name VARCHAR(150) NOT NULL,
+  phone VARCHAR(15) NULL DEFAULT NULL,
+  email VARCHAR(150) NULL DEFAULT NULL,
+  address VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;

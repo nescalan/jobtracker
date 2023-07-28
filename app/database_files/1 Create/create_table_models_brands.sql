@@ -1,7 +1,7 @@
-CREATE TABLE models_brands (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    model VARCHAR(45) NOT NULL,
-    brand VARCHAR(45) NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE (model, brand) -- Ensure model and brand combinations are unique
-) ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS jobtracker.models_brands (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  model VARCHAR(45) NOT NULL,
+  brand VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id),
+  INDEX model_brand_idx (model, brand) 
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;

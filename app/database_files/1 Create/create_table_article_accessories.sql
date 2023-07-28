@@ -1,6 +1,5 @@
-CREATE TABLE article_accessories (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    accesory VARCHAR(150) NOT NULL,
-    PRIMARY KEY (id),
-    CONSTRAINT fk_article_accessories_id FOREIGN KEY (id) REFERENCES articles (id)
-) ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS jobtracker.article_accessories (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  accessory VARCHAR(150) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;
