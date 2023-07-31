@@ -25,7 +25,7 @@ if (isset($_SESSION['user'])) {
 
     # Instantiate User object and Affiliated Co. Object
     $user = new User();
-    // $affilatedCompany = new AffilatedCompany();
+    $affilatedCompany = new AffilatedCompany();
 
     # Validata form
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -37,7 +37,7 @@ if (isset($_SESSION['user'])) {
         $user->setPassword2($_POST['password2']);
 
         // Check if any of the required fields are empty
-        if (empty($user->getFullName()) || empty($uaffilatedCompanyser->getCompanyName()) || empty($user->getEmail()) || empty($user->getPassword()) || empty($user->getPassword2())) {
+        if (empty($user->getFullName()) || empty($affilatedCompany->getCompanyName()) || empty($user->getEmail()) || empty($user->getPassword()) || empty($user->getPassword2())) {
 
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios.</div>';
@@ -47,7 +47,7 @@ if (isset($_SESSION['user'])) {
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">El nombre debe tener al menos 3 caracteres.</div>';
 
-        } elseif (!checkCompanyLength($uaffilatedCompanyser->getCompanyName())) {
+        } elseif (!checkCompanyLength($affilatedCompany->getCompanyName())) {
 
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">La Empresa debe tener al menos 3 caracteres.</div>';
@@ -99,7 +99,7 @@ if (isset($_SESSION['user'])) {
 
                 // Clean the form variables
                 $user->setFullName('');
-                $uaffilatedCompanyser->getCompanyName('');
+                $affilatedCompany->getCompanyName('');
                 $user->setEmail('');
 
                 // Set the success message
