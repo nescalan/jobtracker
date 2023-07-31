@@ -2,22 +2,23 @@
 
 class User
 {
+    // Properties
     protected $fullName;
-    protected $company;
+    protected $affiliatedCompanyID;
     protected $email;
     protected $password;
     protected $password2;
 
-
+    // Methods
     public function __construct(
         string $pName = '',
-        string $pCompany = '',
+        string $pAffiliatedCompanyID = '',
         string $pEmail = '',
         string $pPwd = '',
         string $pPwd2 = ''
     ) {
         $this->fullName = isset($pName) ? $pName : '';
-        $this->company = isset($pCompany) ? $pCompany : '';
+        $this->affiliatedCompanyID = isset($pAffiliatedCompanyID) ? $pAffiliatedCompanyID : '';
         $this->email = isset($pEmail) ? $pEmail : '';
         $this->password = isset($pPwd) ? $pPwd : '';
         $this->password2 = isset($pPwd2) ? $pPwd2 : '';
@@ -47,21 +48,21 @@ class User
     }
 
     /**
-     * Get the value of company
+     * Get the value of affiliatedCompanyID
      */
-    public function getCompany()
+    public function getAffiliatedCompanyID()
     {
-        return $this->company;
+        return $this->affiliatedCompanyID;
     }
 
     /**
-     * Set the value of company
+     * Set the value of affiliatedCompanyID
      *
      * @return  self
      */
-    public function setCompany($company)
+    public function setAffiliatedCompanyID($affiliatedCompanyID)
     {
-        $this->company = $company;
+        $this->affiliatedCompanyID = $affiliatedCompanyID;
 
         return $this;
     }

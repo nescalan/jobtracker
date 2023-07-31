@@ -1,8 +1,6 @@
 <?php #register.php
 require_once './app/model/Connection.php';
 
-
-
 # Constants, variables and arrays
 $connection = $errorMessage = $successMessage = '';
 
@@ -14,33 +12,32 @@ if (isset($_SESSION['user'])) {
 } else {
     require_once './app/controller/functions.controller.php';
     require_once './app/clases/User.class.php';
-
+    require_once './app/clases/AffilatedCompany.class.php';
 
     # Database connection
     $connection = new Connection();
     $mysqli = $connection->openConnection();
-
-
 
     #  Check connection
     if (!$mysqli) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    # Instantiate User object
+    # Instantiate User object and Affiliated Co. Object
     $user = new User();
+    $affilatedCompany = new AffilatedCompany();
 
     # Validata form
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve form data
         $user->setFullName(sanitizePhrase($_POST['full-name']));
-        $user->setCompany(sanitizePhrase($_POST['company']));
+        $affilatedCompany->setCompanyName(sanitizePhrase($_POST['company']));
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
         $user->setPassword2($_POST['password2']);
 
         // Check if any of the required fields are empty
-        if (empty($user->getFullName()) || empty($user->getCompany()) || empty($user->getEmail()) || empty($user->getPassword()) || empty($user->getPassword2())) {
+        if (empty($user->getFullName()) || empty($affilatedCompany->getCompanyName()) || empty($user->getEmail()) || empty($user->getPassword()) || empty($user->getPassword2())) {
 
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">Todos los campos son obligatorios.</div>';
@@ -50,7 +47,7 @@ if (isset($_SESSION['user'])) {
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">El nombre debe tener al menos 3 caracteres.</div>';
 
-        } elseif (!checkCompanyLength($user->getCompany())) {
+        } elseif (!checkCompanyLength($affilatedCompany->getCompanyName())) {
 
             // Set the error message
             $errorMessage = '<div class="alert alert-danger" role="alert">La Empresa debe tener al menos 3 caracteres.</div>';
@@ -91,9 +88,7 @@ if (isset($_SESSION['user'])) {
             if (mysqli_num_rows($result) > 0) {
                 $errorMessage .= '<div class="alert alert-danger" role="alert">El nombre de usuario ya existe.</div>';
             } else {
-
-
-                // The user does not exist
+                // The user does not exist: Insert user into 'users' table
                 $sqlUserInsert = "INSERT INTO users (fullname, email, password) VALUES (
                     '" . mysqli_real_escape_string($mysqli, $user->getFullName()) . "',
                     '" . mysqli_real_escape_string($mysqli, $user->getEmail()) . "',
@@ -104,7 +99,7 @@ if (isset($_SESSION['user'])) {
 
                 // Clean the form variables
                 $user->setFullName('');
-                $user->setCompany('');
+                $affilatedCompany->getCompanyName('');
                 $user->setEmail('');
 
                 // Set the success message
