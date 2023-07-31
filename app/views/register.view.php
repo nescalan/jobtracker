@@ -51,7 +51,7 @@
                     </label>
                     <label>
                         <input id="company" type="text" name="company"
-                            value="<?php echo ucwords($user->getCompany()); ?>" />
+                            value="<?php echo ucwords($uaffilatedCompanyser->getCompanyName()); ?>" />
                         <span id="com">Empresa</span>
                     </label>
                     <label>
