@@ -11,8 +11,8 @@ if (isset($_SESSION['user'])) {
     header('Location: ./index.php');
 } else {
     require_once './app/controller/functions.controller.php';
-    require_once './app/clases/User.class.php';
-    require_once './app/clases/AffilatedCompany.class.php';
+    require_once './app/class/User.class.php';
+    require_once './app/class/AffilatedCompany.class.php';
 
     # Database connection
     $connection = new Connection();
@@ -73,19 +73,35 @@ if (isset($_SESSION['user'])) {
             $user->setPassword(password_hash(sanitizePassword($_POST['password']), PASSWORD_DEFAULT));
             $user->setPassword2(password_hash(sanitizePassword($_POST['password2']), PASSWORD_DEFAULT));
 
+            $company = mysqli_real_escape_string($mysqli, $affilatedCompany->getCompanyName());
             $email = mysqli_real_escape_string($mysqli, $user->getEmail());
 
+            // Check if company exist in the database table 'companies'
+            $sqlCompanies = "SELECT * FROM companies WHERE company_name = '$company' LIMIT 1";
+            $resultCompanies = mysqli_query($mysqli, $sqlCompanies);
+            if (!$resultCompanies) {
+                die("Error executing the query: " . mysqli_error($mysqli));
+            }
+            $resultCompaniesArray = mysqli_fetch_assoc($resultUsers);
+            print_r($resultCompaniesArray);
+
+            if (mysqli_num_rows($resultCompanies) > 0) {
+                $errorMessage .= '<div class="alert alert-danger" role="alert">La empresa ya está registrada.</div>';
+            }
+
             // Check if the user exists in the database table 'users'
-            $sqlUsers = "SELECT * FROM users WHERE email = '$email' LIMIT 1 ";
+            $sqlUser = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
+            $resultUser = mysqli_query($mysqli, $sqlUser);
 
-            // Executes the query select
-            $result = mysqli_query($mysqli, $sqlUsers);
+            if (!$resultUser) {
+                die("Error executing the query: " . mysqli_error($mysqli));
+            }
 
-            // Fetch the results of the query
-            $resultArray = mysqli_fetch_assoc($result);
+            $resultUserArray = mysqli_fetch_assoc($resultUser);
+            print_r($resultUserArray);
 
             // Check if there are any errors
-            if (mysqli_num_rows($result) > 0) {
+            if (mysqli_num_rows($resultUsers) > 0) {
                 $errorMessage .= '<div class="alert alert-danger" role="alert">El nombre de usuario ya existe.</div>';
             } else {
                 // The user does not exist: Insert user into 'users' table
@@ -99,7 +115,7 @@ if (isset($_SESSION['user'])) {
 
                 // Clean the form variables
                 $user->setFullName('');
-                $affilatedCompany->getCompanyName('');
+                $affilatedCompany->setCompanyName('');
                 $user->setEmail('');
 
                 // Set the success message
