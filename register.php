@@ -1,8 +1,6 @@
 <?php #register.php
 require_once './app/model/Connection.php';
 
-
-
 # Constants, variables and arrays
 $connection = $errorMessage = $successMessage = '';
 
@@ -15,12 +13,9 @@ if (isset($_SESSION['user'])) {
     require_once './app/controller/functions.controller.php';
     require_once './app/clases/User.class.php';
 
-
     # Database connection
     $connection = new Connection();
     $mysqli = $connection->openConnection();
-
-
 
     #  Check connection
     if (!$mysqli) {
@@ -91,9 +86,7 @@ if (isset($_SESSION['user'])) {
             if (mysqli_num_rows($result) > 0) {
                 $errorMessage .= '<div class="alert alert-danger" role="alert">El nombre de usuario ya existe.</div>';
             } else {
-
-
-                // The user does not exist
+                // The user does not exist: Insert user into 'users' table
                 $sqlUserInsert = "INSERT INTO users (fullname, email, password) VALUES (
                     '" . mysqli_real_escape_string($mysqli, $user->getFullName()) . "',
                     '" . mysqli_real_escape_string($mysqli, $user->getEmail()) . "',

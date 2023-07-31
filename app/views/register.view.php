@@ -45,28 +45,30 @@
             <form class="content__form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="content__inputs">
                     <label>
-                        <input type="text" name="full-name" value="<?php echo ucwords($user->getFullName()); ?>" />
+                        <input id="full-name" type="text" name="full-name"
+                            value="<?php echo ucwords($user->getFullName()); ?>" />
                         <span>Nombre completo</span>
                     </label>
                     <label>
-                        <input type="text" name="company" value="<?php echo ucwords($user->getCompany()); ?>" />
-                        <span>Empresa</span>
+                        <input id="company" type="text" name="company"
+                            value="<?php echo ucwords($user->getCompany()); ?>" />
+                        <span id="com">Empresa</span>
                     </label>
                     <label>
-                        <input type="text" name="email" value="<?php echo $user->getEmail() ?>" />
+                        <input id="email" type="text" name="email" value="<?php echo $user->getEmail() ?>" />
                         <span>Correo electrónico</span>
                     </label>
 
                     <label>
-                        <input type="password" name="password" />
+                        <input id="password" type="password" name="password" />
                         <span>Contraseña</span>
                     </label>
                     <label>
-                        <input type="password" name="password2" />
+                        <input id="password2" type="password" name="password2" />
                         <span>Confirmar Contraseña</span>
                     </label>
                 </div>
-                <button>Crear cuenta</button>
+                <button id="submit">Crear cuenta</button>
 
                 <!-- Error messages -->
                 <?php if (!empty($errorMessage)): ?>
@@ -84,6 +86,7 @@
             </div>
         </div>
     </section>
+
 </body>
 
 </html>
