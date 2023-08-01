@@ -41,7 +41,7 @@ class Activity
     /**
      * Get the value of receivedStatus
      */
-    public function getReceived()
+    public function getReceivedStatus()
     {
         return $this->receivedStatus;
     }
@@ -51,7 +51,7 @@ class Activity
      *
      * @return  self
      */
-    public function setReceived($receivedStatus)
+    public function setReceivedStatus($receivedStatus)
     {
         $this->receivedStatus = $receivedStatus;
 

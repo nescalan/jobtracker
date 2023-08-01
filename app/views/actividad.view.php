@@ -66,7 +66,9 @@
             class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
             <div class="u-container-layout u-similar-container u-container-layout-5">
               <h3 class="u-align-left u-text u-text-10">En Reparación</h3>
-              <p class="u-align-left u-text u-text-11">Total:</p>
+              <p class="u-align-left u-text u-text-11">Total:
+
+              </p>
             </div>
           </div>
           <div

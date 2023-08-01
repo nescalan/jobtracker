@@ -2,12 +2,40 @@
 
 session_start();
 
-if (isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+} else {
+    # Import database connection
+    require_once './app/model/Connection.php';
+    require_once './app/class/Activity.class.php';
+
+    $activity = new Activity();
+
+    # Database connection
+    $connection = new Connection();
+    $mysqli = $connection->openConnection();
+
+    # Check connection
+    if (!$mysqli) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    # Get order_status from dB
+    $sqlOrderStatus =
+        " SELECT COUNT(*) AS order_count
+          FROM WORKORDERS
+          WHERE order_status = 'Recibido'
+        ";
+
+    # Executes the query select
+    $resultReceivedStatus = mysqli_query($mysqli, $sqlOrderStatus);
+    $activity->setReceivedStatus(mysqli_fetch_array($resultReceivedStatus));
+    $resultado = mysqli_fetch_array($resultReceivedStatus);
+    // print_r($resultReceivedStatus);
+    print_r($resultado);
+
     # Redirect to home page if user is logged in
     require_once './app/views/actividad.view.php';
-} else {
-
-    header("Location: login.php");
 }
 
 # Close database connection
