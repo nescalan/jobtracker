@@ -3,7 +3,7 @@
 class Activity
 {
     # Propierties
-    private $received;
+    private $receivedStatus;
     private $diagnosis;
     private $customerApproval;
     private $inRepair;
@@ -16,7 +16,7 @@ class Activity
 
     # Method construct
     public function __construct(
-        int $pRecived = 0,
+        int $pReceivedStatus = 0,
         int $pDiagnosis = 0,
         int $pCustomerApproval = 0,
         int $pInRepair = 0,
@@ -26,37 +26,34 @@ class Activity
         int $pDelivered = 0,
         int $pExternalOrder = 0
     ) {
-        $this->received = isset($pRecived) ? $pRecived : $pRecived = 0;
-        $this->diagnosis = isset($pDiagnosis) ? $pDiagnosis : $pDiagnosis = 0;
-        $this->customerApproval = isset($pCustomerApproval) ? $pCustomerApproval : $pCustomerApproval = 0;
-        $this->inRepair = isset($pInRepair) ? $pInRepair : $pInRepair = 0;
-        $this->waitingForParts = isset($pWaitingForParts) ? $pWaitingForParts : $pWaitingForParts = 0;
-        $this->inTests = isset($pInTests) ? $pInTests : $pInTests = 0;
-        $this->forDelivery = isset($pForDelivery) ? $pForDelivery : $pForDelivery = 0;
-        $this->delivered = isset($pDelivered) ? $pDelivered : $pDelivered = 0;
-        $this->externalOrder = isset($pExternalOrder) ? $pExternalOrder : $pExternalOrder = 0;
+        $this->receivedStatus = $pReceivedStatus;
+        $this->diagnosis = $pDiagnosis;
+        $this->customerApproval = $pCustomerApproval;
+        $this->inRepair = $pInRepair;
+        $this->waitingForParts = $pWaitingForParts;
+        $this->inTests = $pInTests;
+        $this->forDelivery = $pForDelivery;
+        $this->delivered = $pDelivered;
+        $this->externalOrder = $pExternalOrder;
     }
 
-    # Getters and Setters
-
-
-
+    # Getters and Setters ************************************
     /**
-     * Get the value of received
+     * Get the value of receivedStatus
      */
     public function getReceived()
     {
-        return $this->received;
+        return $this->receivedStatus;
     }
 
     /**
-     * Set the value of received
+     * Set the value of receivedStatus
      *
      * @return  self
      */
-    public function setReceived($received)
+    public function setReceived($receivedStatus)
     {
-        $this->received = $received;
+        $this->receivedStatus = $receivedStatus;
 
         return $this;
     }

@@ -7,10 +7,10 @@
   <meta name="keywords" content="Actividad" />
   <meta name="description" content="" />
   <title>ordenes-trabajo</title>
-  <link rel="stylesheet" href="../../public/css/nicepage.css" media="screen" />
-  <link rel="stylesheet" href="../../public/css/actividad.css" media="screen" />
-  <script class="u-script" type="text/javascript" src="../../public/js/jquery.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="../../public/js/nicepage.js" defer=""></script>
+  <link rel="stylesheet" href="./public/css/nicepage.css" media="screen" />
+  <link rel="stylesheet" href="./public/css/actividad.css" media="screen" />
+  <script class="u-script" type="text/javascript" src="./public/js/jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="./public/js/nicepage.js" defer=""></script>
   <meta name="generator" content="Nicepage 5.13.1, nicepage.com" />
   <link id="u-theme-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Mulish:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" />
@@ -20,7 +20,7 @@
         "@context": "http://schema.org",
         "@type": "Organization",
         "name": "",
-        "logo": "../../images/b78c1c47-c604-4ca8-9934-e25928046c8b.png",
+        "logo": "../../img/b78c1c47-c604-4ca8-9934-e25928046c8b.png",
         "sameAs": []
       }
     </script>
@@ -33,7 +33,7 @@
 <body class="u-body u-xl-mode" data-lang="es">
 
   <header class="u-box-shadow u-clearfix u-custom-color-1 u-header u-header" id="sec-1607">
-    <?php require_once './menu.view.php' ?>
+    <?php require_once './app/views/menu.view.php'; ?>
   </header>
 
   <section class="u-align-center u-clearfix u-section-1" id="sec-78a1">

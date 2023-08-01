@@ -2,10 +2,15 @@
 
 session_start();
 
-session_destroy();
-$_SESSION = array();
+if (isset($_SESSION['user'])) {
+    # code...
+    session_destroy();
+    $_SESSION = array();
+    header('Location: login.php');
 
-header('Location: login.php');
-
+} else {
+    # Redirect to home page if user is logged in
+    header("Location: actividad.php");
+}
 
 ?>

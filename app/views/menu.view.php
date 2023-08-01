@@ -43,7 +43,7 @@ echo '
         <li class="u-nav-item">
           <a
             class="u-border-2 u-border-active-palette-4-base u-border-hover-palette-4-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-grey-15 u-text-hover-palette-1-light-2 u-text-white"
-            href="../../exit.php"
+            href="./exit.php"
             style="padding: 10px 0px"
             >Salir</a
           >
@@ -241,7 +241,7 @@ echo '
             <li class="u-nav-item">
               <a
                 class="u-button-style u-nav-link"
-                href="../../exit.php"
+                href="./exit.php"
                 >Salir</a
               >
             </li>
@@ -259,7 +259,7 @@ echo '
   >
     <img
       class="u-logo-image u-logo-image-1"
-      src="../../public/img/b78c1c47-c604-4ca8-9934-e25928046c8b.png"
+      src="./public/img/b78c1c47-c604-4ca8-9934-e25928046c8b.png"
     />
   </a>
 </div>

@@ -4,15 +4,12 @@ session_start();
 
 if (isset($_SESSION['user'])) {
     # Redirect to home page if user is logged in
-    header("Location: login.php");
+    require_once './app/views/actividad.view.php';
 } else {
 
-
-
-
-    require_once './app/views/actividad.view.php';
+    header("Location: login.php");
 }
 
 # Close database connection
-mysqli_close($mysqli);
+// mysqli_close($mysqli);
 ?>
