@@ -101,7 +101,6 @@ if (isset($_SESSION['user'])) {
             }
 
             $resultUserArray = mysqli_fetch_assoc($resultUser);
-            print_r($resultUserArray);
 
             if (mysqli_num_rows($resultUser) > 0) {
                 $errorMessage .= '<div class="alert alert-danger" role="alert">El nombre de usuario ya existe.</div>';
@@ -119,10 +118,6 @@ if (isset($_SESSION['user'])) {
                 mysqli_query($mysqli, $sqlCompanyInsert);
                 $affilatedCompanyID = mysqli_insert_id($mysqli);
 
-                // Print Users Table content
-                echo "Name {$user->getFullName()} | Email {$user->getEmail()} | Id: {$affilatedCompanyID} | Pwd: {$user->getPassword()} ";
-
-
                 // The user does not exist: Insert user into users table
                 $sqlUserInsert = "INSERT INTO users (fullname, email, affiliated_company_id, user_password) VALUES (
                     '" . mysqli_real_escape_string($mysqli, $user->getFullName()) . "',
@@ -130,16 +125,6 @@ if (isset($_SESSION['user'])) {
                     '" . $affilatedCompanyID . "',
                     '" . mysqli_real_escape_string($mysqli, $user->getPassword()) . "'
                 )";
-
-                // Execute the query
-                if (mysqli_query($mysqli, $sqlUserInsert)) {
-                    // Query executed successfully, do any other necessary actions
-                    echo "User inserted successfully!";
-                } else {
-                    // Query execution failed, display the error message
-                    echo "Error executing the query: " . mysqli_error($mysqli);
-                }
-
 
                 // Clean the form variables
                 $user->setFullName('');
