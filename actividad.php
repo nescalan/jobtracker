@@ -6,8 +6,12 @@ if (isset($_SESSION['user'])) {
     # Redirect to home page if user is logged in
     header("Location: login.php");
 } else {
-    # code...
-    header('Location: ./app/views/actividad.view.php');
+
+
+
+    require_once './app/views/actividad.view.php';
 }
 
+# Close database connection
+mysqli_close($mysqli);
 ?>
