@@ -3,7 +3,7 @@
 session_start();
 
 require_once './app/controller/functions.controller.php';
-require_once './app/clases/User.class.php';
+require_once './app/class/User.class.php';
 
 
 

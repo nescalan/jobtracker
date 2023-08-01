@@ -1,18 +1,20 @@
 <?php #register.php
+
+session_start();
+
 require_once './app/model/Connection.php';
 
 # Constants, variables and arrays
 $connection = $errorMessage = $successMessage = '';
 
-session_start();
 
 if (isset($_SESSION['user'])) {
     # code...
     header('Location: ./index.php');
 } else {
     require_once './app/controller/functions.controller.php';
-    require_once './app/clases/User.class.php';
-    require_once './app/clases/AffilatedCompany.class.php';
+    require_once './app/class/User.class.php';
+    require_once './app/class/AffiliatedCompany.class.php';
 
     # Database connection
     $connection = new Connection();
@@ -25,7 +27,7 @@ if (isset($_SESSION['user'])) {
 
     # Instantiate User object and Affiliated Co. Object
     $user = new User();
-    $affilatedCompany = new AffilatedCompany();
+    $affilatedCompany = new AffiliatedCompany();
 
     # Validata form
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -69,58 +71,89 @@ if (isset($_SESSION['user'])) {
 
         } else {
 
-            // Encript the password with md5 algorithm
+            // Encript the password with password_hash algorithm
             $user->setPassword(password_hash(sanitizePassword($_POST['password']), PASSWORD_DEFAULT));
             $user->setPassword2(password_hash(sanitizePassword($_POST['password2']), PASSWORD_DEFAULT));
 
+            $company = mysqli_real_escape_string($mysqli, $affilatedCompany->getCompanyName());
             $email = mysqli_real_escape_string($mysqli, $user->getEmail());
 
+            // Check if company exist in the database table 'affiliated_companies'
+            $sqlCompany = "SELECT * FROM affiliated_companies WHERE company_name = '$company' LIMIT 1";
+            $resultCompany = mysqli_query($mysqli, $sqlCompany);
+
+            if (!$resultCompany) {
+                die("Error executing the query: " . mysqli_error($mysqli));
+            }
+
+            // Check if resultCompany 
+            if (mysqli_num_rows($resultCompany) > 0) {
+                $errorMessage .= '<div class="alert alert-danger" role="alert">La empresa ya está registrada.</div>';
+            }
+
             // Check if the user exists in the database table 'users'
-            $sqlUsers = "SELECT * FROM users WHERE email = '$email' LIMIT 1 ";
+            $sqlUser = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
+            $resultUser = mysqli_query($mysqli, $sqlUser);
 
-            // Executes the query select
-            $result = mysqli_query($mysqli, $sqlUsers);
+            // Check resultUser
+            if (!$resultUser) {
+                die("Error executing the query: " . mysqli_error($mysqli));
+            }
 
-            // Fetch the results of the query
-            $resultArray = mysqli_fetch_assoc($result);
+            $resultUserArray = mysqli_fetch_assoc($resultUser);
+            print_r($resultUserArray);
+
+            if (mysqli_num_rows($resultUser) > 0) {
+                $errorMessage .= '<div class="alert alert-danger" role="alert">El nombre de usuario ya existe.</div>';
+            }
 
             // Check if there are any errors
-            if (mysqli_num_rows($result) > 0) {
-                $errorMessage .= '<div class="alert alert-danger" role="alert">El nombre de usuario ya existe.</div>';
-            } else {
-                // The user does not exist: Insert user into 'users' table
-                $sqlUserInsert = "INSERT INTO users (fullname, email, password) VALUES (
+            if (mysqli_num_rows($resultUser) < 1 && mysqli_num_rows($resultCompany) < 1) {
+
+                // The company doest not exists: Inster it into 'companies' table
+                $sqlCompanyInsert = "INSERT INTO affiliated_companies (company_name) VALUES (
+                    '" . mysqli_real_escape_string($mysqli, $affilatedCompany->getCompanyName()) . "'
+                )";
+
+                // Executes Insert
+                mysqli_query($mysqli, $sqlCompanyInsert);
+                $affilatedCompanyID = mysqli_insert_id($mysqli);
+
+                // Print Users Table content
+                echo "Name {$user->getFullName()} | Email {$user->getEmail()} | Id: {$affilatedCompanyID} | Pwd: {$user->getPassword()} ";
+
+
+                // The user does not exist: Insert user into users table
+                $sqlUserInsert = "INSERT INTO users (fullname, email, affiliated_company_id, user_password) VALUES (
                     '" . mysqli_real_escape_string($mysqli, $user->getFullName()) . "',
                     '" . mysqli_real_escape_string($mysqli, $user->getEmail()) . "',
+                    '" . $affilatedCompanyID . "',
                     '" . mysqli_real_escape_string($mysqli, $user->getPassword()) . "'
-                );";
+                )";
 
-                mysqli_query($mysqli, $sqlUserInsert);
+                // Execute the query
+                if (mysqli_query($mysqli, $sqlUserInsert)) {
+                    // Query executed successfully, do any other necessary actions
+                    echo "User inserted successfully!";
+                } else {
+                    // Query execution failed, display the error message
+                    echo "Error executing the query: " . mysqli_error($mysqli);
+                }
+
 
                 // Clean the form variables
                 $user->setFullName('');
-                $affilatedCompany->getCompanyName('');
+                $affilatedCompany->setCompanyName('');
                 $user->setEmail('');
 
                 // Set the success message
-                $fullName = ucwords($user->getFullName());
-
-
                 $successMessage = "<div class='alert alert-success' role='alert'>Tu cuenta ha sido creada. <br/> Inicia sesión y comenzar a usar nuestro servicio.</div>";
-
-                // Get the user's name
-                $nombre = $user->getFullName();
-
             }
-
-            // Free the memory associated with the result variable
-            mysqli_free_result($result);
-
         }
     }
 
     // Close connection
-    $connection->closeConnection($mysqli);
+    mysqli_close($mysqli);
 
     require_once './app/views/register.view.php';
 

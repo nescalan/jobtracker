@@ -4,7 +4,7 @@ class User
 {
     // Properties
     protected $fullName;
-    protected $affiliatedCompanyID;
+    protected $affiliatedCompany;
     protected $email;
     protected $password;
     protected $password2;
@@ -18,7 +18,7 @@ class User
         string $pPwd2 = ''
     ) {
         $this->fullName = isset($pName) ? $pName : '';
-        $this->affiliatedCompanyID = isset($pAffiliatedCompanyID) ? $pAffiliatedCompanyID : '';
+        $this->affiliatedCompany = isset($pAffiliatedCompanyID) ? $pAffiliatedCompanyID : '';
         $this->email = isset($pEmail) ? $pEmail : '';
         $this->password = isset($pPwd) ? $pPwd : '';
         $this->password2 = isset($pPwd2) ? $pPwd2 : '';
@@ -48,21 +48,21 @@ class User
     }
 
     /**
-     * Get the value of affiliatedCompanyID
+     * Get the value of affiliatedCompany
      */
-    public function getAffiliatedCompanyID()
+    public function getAffiliatedCompany()
     {
-        return $this->affiliatedCompanyID;
+        return $this->affiliatedCompany;
     }
 
     /**
-     * Set the value of affiliatedCompanyID
+     * Set the value of affiliatedCompany
      *
      * @return  self
      */
-    public function setAffiliatedCompanyID($affiliatedCompanyID)
+    public function setAffiliatedCompany($affiliatedCompany)
     {
-        $this->affiliatedCompanyID = $affiliatedCompanyID;
+        $this->affiliatedCompany = $affiliatedCompany;
 
         return $this;
     }

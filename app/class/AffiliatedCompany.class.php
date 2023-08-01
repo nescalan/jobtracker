@@ -1,12 +1,13 @@
 <?php
 
-class AffilatedCompany
+class AffiliatedCompany
 {
     # Properties
     protected $companyName;
     protected $phone;
     protected $email;
     protected $address;
+    protected $companyID;
 
     # Method
     public function __construct(
@@ -98,6 +99,26 @@ class AffilatedCompany
     public function setAddress($address)
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of companyID
+     */
+    public function getCompanyID()
+    {
+        return $this->companyID;
+    }
+
+    /**
+     * Set the value of companyID
+     *
+     * @return  self
+     */
+    public function setCompanyID($companyID)
+    {
+        $this->companyID = $companyID;
 
         return $this;
     }
