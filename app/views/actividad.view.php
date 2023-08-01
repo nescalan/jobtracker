@@ -50,37 +50,58 @@
           </div>
           <div
             class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
-            <div class="u-container-layout u-similar-container u-container-layout-2">
-              <h3 class="u-align-left u-text u-text-4">En curso</h3>
-              <p class="u-align-left u-text u-text-5">Total:</p>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
             <div class="u-container-layout u-similar-container u-container-layout-3">
-              <h3 class="u-align-left u-text u-text-6">Pendiente</h3>
+              <h3 class="u-align-left u-text u-text-6">En Diagnóstico</h3>
               <p class="u-align-left u-text u-text-7">Total:</p>
             </div>
           </div>
           <div
             class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
             <div class="u-container-layout u-similar-container u-container-layout-4">
-              <h3 class="u-align-left u-text u-text-8">Terminado</h3>
+              <h3 class="u-align-left u-text u-text-8">Espera aprobación</h3>
               <p class="u-align-left u-text u-text-9">Total:</p>
             </div>
           </div>
           <div
             class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
             <div class="u-container-layout u-similar-container u-container-layout-5">
-              <h3 class="u-align-left u-text u-text-10">Retirado</h3>
+              <h3 class="u-align-left u-text u-text-10">En Reparación</h3>
               <p class="u-align-left u-text u-text-11">Total:</p>
             </div>
           </div>
           <div
             class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
             <div class="u-container-layout u-similar-container u-container-layout-6">
-              <h3 class="u-align-left u-text u-text-12">Orden externa</h3>
+              <h3 class="u-align-left u-text u-text-12">Esperando repuestos</h3>
               <p class="u-align-left u-text u-text-13">Total:</p>
+            </div>
+          </div>
+          <div
+            class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
+            <div class="u-container-layout u-similar-container u-container-layout-4">
+              <h3 class="u-align-left u-text u-text-8">En pruebas</h3>
+              <p class="u-align-left u-text u-text-9">Total:</p>
+            </div>
+          </div>
+          <div
+            class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
+            <div class="u-container-layout u-similar-container u-container-layout-5">
+              <h3 class="u-align-left u-text u-text-10">Listo para entrega</h3>
+              <p class="u-align-left u-text u-text-11">Total:</p>
+            </div>
+          </div>
+          <div
+            class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
+            <div class="u-container-layout u-similar-container u-container-layout-6">
+              <h3 class="u-align-left u-text u-text-12">Entregado</h3>
+              <p class="u-align-left u-text u-text-13">Total:</p>
+            </div>
+          </div>
+          <div
+            class="u-align-center u-border-1 u-border-grey-15 u-container-style u-list-item u-radius-5 u-repeater-item u-shape-round u-white">
+            <div class="u-container-layout u-similar-container u-container-layout-2">
+              <h3 class="u-align-left u-text u-text-4">Orden externa</h3>
+              <p class="u-align-left u-text u-text-5">Total:</p>
             </div>
           </div>
         </div>

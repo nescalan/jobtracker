@@ -21,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user->setEmail(sanitizeEmail($_POST["user"]));
     $user->setPassword($_POST['password']);
 
-    echo "email: {$user->getEmail()} | pwd: {$user->getPassword()} <br>";
 
     if (empty($user->getEmail()) || empty($user->getPassword())) {
 
@@ -47,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Clean and replace any special characters in the string with their escaped counterparts
         $email = mysqli_real_escape_string($mysqli, $user->getEmail());
-        echo "<br> Resultado de Email: {$email}";
 
         // Check if user exists
         $sqlUsers = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
@@ -58,15 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Fetch the results of quety
         $resultArray = mysqli_fetch_assoc($result);
 
-        print_r($resultArray);
-
-
-
         // Check if there are any errors
         if (mysqli_num_rows($result) < 1) {
             $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña inválidos. <br/>Por favor, inténtalo de nuevo.</div>';
 
-        } elseif (!password_verify($user->getPassword(), $resultArray['password'])) {
+        } elseif (!password_verify($user->getPassword(), $resultArray['user_password'])) {
             # Error Message
             $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña inválidos. <br/>Por favor, inténtalo de nuevo.</div>';
         } else {
@@ -74,21 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // $_SESSION['user'] = $user;
             header('Location: actividad.php');
             $successMessage .= '<div class="alert alert-success" role="alert">En todas.</div>';
-
-
         }
 
-
-
         // Close connection
-        $connection->closeConnection($mysqli);
+        mysqli_close($mysqli);
     }
 }
-
-
-
-
-
 require_once './app/views/login.view.php';
-
 ?>

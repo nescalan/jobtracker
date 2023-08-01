@@ -73,7 +73,6 @@ if (isset($_SESSION['user'])) {
 
             // Encript the password with password_hash algorithm
             $user->setPassword(password_hash(sanitizePassword($_POST['password']), PASSWORD_DEFAULT));
-            $user->setPassword2(password_hash(sanitizePassword($_POST['password2']), PASSWORD_DEFAULT));
 
             $company = mysqli_real_escape_string($mysqli, $affilatedCompany->getCompanyName());
             $email = mysqli_real_escape_string($mysqli, $user->getEmail());
@@ -100,8 +99,6 @@ if (isset($_SESSION['user'])) {
                 die("Error executing the query: " . mysqli_error($mysqli));
             }
 
-            $resultUserArray = mysqli_fetch_assoc($resultUser);
-
             if (mysqli_num_rows($resultUser) > 0) {
                 $errorMessage .= '<div class="alert alert-danger" role="alert">El nombre de usuario ya existe.</div>';
             }
@@ -125,6 +122,9 @@ if (isset($_SESSION['user'])) {
                     '" . $affilatedCompanyID . "',
                     '" . mysqli_real_escape_string($mysqli, $user->getPassword()) . "'
                 )";
+
+                // Executes Insert
+                mysqli_query($mysqli, $sqlUserInsert);
 
                 // Clean the form variables
                 $user->setFullName('');
