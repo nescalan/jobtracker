@@ -9,6 +9,7 @@ if (isset($_SESSION['user'])) {
 
 
 
+
     require_once './app/views/actividad.view.php';
 }
 
