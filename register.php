@@ -141,7 +141,5 @@ if (isset($_SESSION['user'])) {
     mysqli_close($mysqli);
 
     require_once './app/views/register.view.php';
-
 }
-
 ?>
