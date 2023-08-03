@@ -36,6 +36,20 @@
     <?php require_once './app/views/menu.view.php'; ?>
   </header>
 
+  <section>
+    <?php
+
+    // Check if the session variable is set
+    if (isset($_SESSION["user"])) {
+      // Print the session variable
+      echo $_SESSION["user"];
+    } else {
+      // The session variable is not set, so print a message
+      echo "The session variable is not set.";
+    }
+    ?>
+  </section>
+
   <section class="u-align-center u-clearfix u-section-1" id="sec-78a1">
     <div class="u-clearfix u-sheet u-sheet-1">
       <h2 class="u-text u-text-1">Actividad</h2>

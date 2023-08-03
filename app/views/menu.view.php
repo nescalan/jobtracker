@@ -251,7 +251,7 @@ echo '
       <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
     </div>
   </nav>
-  <a
+    <a
     href="https://www.mobilphonecr.com"
     class="u-image u-logo u-image-1"
     data-image-width="80"
@@ -262,7 +262,9 @@ echo '
       src="./public/img/b78c1c47-c604-4ca8-9934-e25928046c8b.png"
     />
   </a>
-</div>
+  <h4>Empresa</h4>
+
+  </div>
 
 ';
 

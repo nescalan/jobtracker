@@ -8,8 +8,10 @@ if (!isset($_SESSION['user'])) {
     # Import database connection
     require_once './app/model/Connection.php';
     require_once './app/class/Activity.class.php';
+    require_once './app/class/AffiliatedCompany.class.php';
 
     $activity = new Activity();
+    $affilatedCompany = new AffiliatedCompany();
 
     # Database connection
     $connection = new Connection();
@@ -19,6 +21,11 @@ if (!isset($_SESSION['user'])) {
     if (!$mysqli) {
         die("Connection failed: " . mysqli_connect_error());
     }
+
+    # Get affiliated compnay's name
+    // $sqlCompanyName = 
+    //     "SELECT  
+    //     FROM affiliated_companies; "
 
     # Get order_status from dB
     $sqlOrderStatus =
@@ -33,6 +40,10 @@ if (!isset($_SESSION['user'])) {
     $resultado = mysqli_fetch_array($resultReceivedStatus);
     // print_r($resultReceivedStatus);
     print_r($resultado);
+
+    echo $_SESSION['user'];
+
+    // print_r($_SESSION['user']);
 
     # Redirect to home page if user is logged in
     require_once './app/views/actividad.view.php';

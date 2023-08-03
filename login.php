@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errorMessage .= '<div class="alert alert-danger" role="alert">Usuario o contraseña inválidos. <br/>Por favor, inténtalo de nuevo.</div>';
         } else {
             # Header to actividad.php
-            $_SESSION['user'] = $user;
+            $_SESSION['user'] = $user->getEmail();
             header('Location: actividad.php');
             $successMessage .= '<div class="alert alert-success" role="alert">En todas.</div>';
         }
