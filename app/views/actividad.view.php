@@ -34,21 +34,23 @@
 
   <header class="u-box-shadow u-clearfix u-custom-color-1 u-header u-header" id="sec-1607">
     <?php require_once './app/views/menu.view.php'; ?>
+    <section>
+      <?php
+
+      // Check if the session variable is set
+      if (isset($_SESSION["user"])) {
+        // Print the session variable
+        echo "Empresa: {$_SESSION['company']} <br />";
+        echo "Usuario: {$_SESSION['user']} <br />";
+      } else {
+        // The session variable is not set, so print a message
+        echo "The session variable is not set.";
+      }
+      ?>
+    </section>
   </header>
 
-  <section>
-    <?php
 
-    // Check if the session variable is set
-    if (isset($_SESSION["user"])) {
-      // Print the session variable
-      echo $_SESSION["user"];
-    } else {
-      // The session variable is not set, so print a message
-      echo "The session variable is not set.";
-    }
-    ?>
-  </section>
 
   <section class="u-align-center u-clearfix u-section-1" id="sec-78a1">
     <div class="u-clearfix u-sheet u-sheet-1">

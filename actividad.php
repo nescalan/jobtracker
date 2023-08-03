@@ -22,26 +22,36 @@ if (!isset($_SESSION['user'])) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
+    # Loged user
+    $logedUser = $_SESSION['user'];
+
     # Get affiliated compnay's name
-    // $sqlCompanyName = 
-    //     "SELECT  
-    //     FROM affiliated_companies; "
+    $sqlCompanyName =
+        "SELECT u.fullname, ac.company_name
+         FROM users u
+         INNER JOIN affiliated_companies ac ON u.affiliated_company_id = ac.id
+         WHERE u.email = '$logedUser'";
+
+    # Executes the sqlCompanyName query
+    $resultCompanyName = mysqli_query($mysqli, $sqlCompanyName);
+    $resultadoEmpresa = mysqli_fetch_array($resultCompanyName);
+    $_SESSION['company'] = $resultadoEmpresa['company_name'];
 
     # Get order_status from dB
-    $sqlOrderStatus =
-        " SELECT COUNT(*) AS order_count
-          FROM WORKORDERS
-          WHERE order_status = 'Recibido'
-        ";
+    // $sqlOrderStatus =
+    //     " SELECT COUNT(*) AS order_count
+    //       FROM WORKORDERS
+    //       WHERE order_status = 'Recibido'
+    //     ";
 
     # Executes the query select
-    $resultReceivedStatus = mysqli_query($mysqli, $sqlOrderStatus);
-    $activity->setReceivedStatus(mysqli_fetch_array($resultReceivedStatus));
-    $resultado = mysqli_fetch_array($resultReceivedStatus);
+    // $resultReceivedStatus = mysqli_query($mysqli, $sqlOrderStatus);
+    // $activity->setReceivedStatus(mysqli_fetch_array($resultReceivedStatus));
+    // $resultado = mysqli_fetch_array($resultReceivedStatus);
     // print_r($resultReceivedStatus);
-    print_r($resultado);
+    // print_r($resultado);
 
-    echo $_SESSION['user'];
+    // echo $_SESSION['user'];
 
     // print_r($_SESSION['user']);
 
