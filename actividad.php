@@ -38,18 +38,20 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['company'] = $resultadoEmpresa['company_name'];
 
     # Get order_status from dB
-    // $sqlOrderStatus =
-    //     " SELECT COUNT(*) AS order_count
-    //       FROM WORKORDERS
-    //       WHERE order_status = 'Recibido'
-    //     ";
+    $sqlOrderStatus =
+        " SELECT COUNT(*) 
+          FROM workorders
+          WHERE 'order_status' = 'recived'
+        ";
 
     # Executes the query select
-    // $resultReceivedStatus = mysqli_query($mysqli, $sqlOrderStatus);
-    // $activity->setReceivedStatus(mysqli_fetch_array($resultReceivedStatus));
-    // $resultado = mysqli_fetch_array($resultReceivedStatus);
-    // print_r($resultReceivedStatus);
-    // print_r($resultado);
+    $resultReceivedStatus = mysqli_query($mysqli, $sqlOrderStatus);
+    $activity->setReceivedStatus(mysqli_fetch_array($resultReceivedStatus));
+    $resultadoStatus = mysqli_fetch_array($resultReceivedStatus);
+
+
+    # Print the content of resultReceivedStatus
+    print_r($resultReceivedStatus);
 
     // echo $_SESSION['user'];
 
