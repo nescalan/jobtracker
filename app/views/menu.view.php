@@ -256,17 +256,24 @@ echo '
     class="u-image u-logo u-image-1"
     data-image-width="80"
     data-image-height="40"
-  >
+    >
     <img
       class="u-logo-image u-logo-image-1"
       src="./public/img/b78c1c47-c604-4ca8-9934-e25928046c8b.png"
     />
   </a>
-  <h4>Empresa</h4>
-
-
+  <section>';
+// Check if the session variable is set
+if (isset($_SESSION["user"])) {
+  $companyName = ucwords($_SESSION['company']);
+  // Print the session variable
+  echo "<h4>" . $companyName . "</h4>" . "<h6>" . $_SESSION['user'] . "</h6>";
+} else {
+  // The session variable is not set, so print a message
+  echo "<h4>The session variable is not set.</h4>";
+}
+echo '
+  </section>
   </div>
-
 ';
-
 ?>
