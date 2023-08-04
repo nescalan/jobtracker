@@ -267,7 +267,7 @@ echo '
 if (isset($_SESSION["user"])) {
   $companyName = ucwords($_SESSION['company']);
   // Print the session variable
-  echo "<h4>" . $companyName . "</h4>" . "<h6>" . $_SESSION['user'] . "</h6>";
+  echo "" . $companyName . " " . " - " . " " . $_SESSION['user'] . "";
 } else {
   // The session variable is not set, so print a message
   echo "<h4>The session variable is not set.</h4>";
